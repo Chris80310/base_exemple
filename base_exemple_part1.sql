@@ -36,7 +36,7 @@ select nom, nodept from dept where nodept > 40;
 
 <!-- 8. Afficher le nom et le prénom des employés dont le nom est alphabétiquement antérieur au prénom. -->
 
-select nom, prenom from employe group by nom asc;
+select nom, prenom from employe order by nom < prenom;
 
 -- 9. Afficher le nom, le salaire et le numéro du département des employés
 -- dont le titre est « Représentant », le numéro de département est 35 et
@@ -44,31 +44,44 @@ select nom, prenom from employe group by nom asc;
 
 select nom, salaire, nodep from employe where titre = "représentant" and nodep = 35 and salaire > 20000;
 
-<!-- Afficher le nom, le titre et le salaire des employés dont le titre est Représentant» ou dont le titre est «Président». -->
+<!-- 10. Afficher le nom, le titre et le salaire des employés dont le titre est Représentant» ou dont le titre est «Président». -->
 
 select nom, titre, salaire from employe where titre = "représentant" or titre = "président";
 
--- Afficher le nom, le titre, le numéro de département, le salaire des
+-- 11. Afficher le nom, le titre, le numéro de département, le salaire des
 -- employés du département 34, dont le titre est « Représentant » ou
--- « Secrétaire » 
+-- « Secrétaire »
+SELECT nom, titre, salaire,nodep FROM employe WHERE nodep = 34  AND ( titre ="représentant" OR titre="secrétaire");
+
+-- 12. Afficher le nom, le titre, le numéro de département, le salaire des
+-- employés dont le titre est "représentant" ou « Secrétaire » dans le département numéro 34.
 
 SELECT nom, titre, salaire,nodep FROM employe WHERE nodep = 34  AND ( titre ="représentant" OR titre="secrétaire");
 
-<!-- Afficher le nom, et le salaire des employés dont le salaire est compris entre 20000 et 30000. -->
+<!-- 13. Afficher le nom, et le salaire des employés dont le salaire est compris entre 20000 et 30000. -->
 
 select nom, salaire from employe where salaire >= 20000 and salaire <= 30000;
 
-<!-- Afficher le nom des employés commençant par la lettre «H». -->
+<!--14. Afficher le nom des employés commençant par la lettre «H». -->
 
+-- méthode 1 :
 select nom from employe where substr(nom,1,1) = "H";
+-- méthode 2 :
+select nom from employe where nom like 'H%';
 
 <!-- Afficher le nom des employés se terminant par la lettre «n». -->
 
+-- méthode 1 :
 select nom from employe where right(nom,1) = "n";
+-- méthode 2 :
+select nom from employe where nom like '%n';
 
 <!-- Afficher le nom des employés contenant la lettre «u» en 3ème position. -->
 
+-- méthode 1 :
 select nom from employe where substr(nom,3,1) = "u";
+-- méthode 2 :
+select nom from employe where nom like '_ _ u%';
 
 <!-- Afficher le salaire et le nom des employés du service 41 classés par salaire décroissant. -->
 
@@ -109,7 +122,7 @@ select nom, salaire, titre, tauxcom, (salaire * tauxcom) as com from employe whe
 
 <!-- Afficher le nom et le prénom (concaténés) des employés. Renommer les colonnes -->
 
-select CONCAT (nom," ",prenom) from employe;
+select CONCAT (nom," ",prenom) AS employés from employe;
 
 <!-- Afficher les 5 premières lettres du nom des employés. -->
 

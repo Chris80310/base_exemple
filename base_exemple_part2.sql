@@ -26,7 +26,7 @@ SELECT employe.nom FROM employe JOIN dept ON nodep = nodept WHERE dept.nom = "di
 -- 4. Rechercher le nom et le salaire des employés qui gagnent plus que
 -- leur patron, et le nom et le salaire de leur patron.
 
-SELECT emp.nom, emp.slaire, patron.nom, patron.alaire 
+SELECT emp.nom, emp.salaire, patron.nom, patron.salaire 
 FROM employe AS emp
 JOIN employe AS patron on emp.nosup = patron.noemp
 where emp.salaire > patron.salaire; 
